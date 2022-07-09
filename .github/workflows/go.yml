@@ -1,4 +1,4 @@
-name: Go
+name: Deploy
 
 on:
   push:
@@ -27,11 +27,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "backup-api-poins-id" #Must be unique in Heroku
+          heroku_app_name: "backup-api-poins-id"
           heroku_email: "robyawaluddin@gmail.com"
           usedocker: true
           docker_build_args: |

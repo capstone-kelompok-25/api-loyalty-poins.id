@@ -33,6 +33,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "backup-api-poins-id"
           heroku_email: "robyawaluddin@gmail.com"
+          userforce: 1
           usedocker: true
           docker_build_args: |
             NODE_ENV

@@ -1,0 +1,12 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Berikut API Poins ID",
+        "title": "API Poins ID",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "api-poins-id.herokuapp.com/v1",
+    "basePath": "/",
+    "paths": {}
+}

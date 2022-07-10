@@ -25,16 +25,16 @@ jobs:
       run: go test -v ./...
 
   deploy:
+    name: Build and deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Build, Push and Deploy to Heroku # set whatever name you want to this step
-        id: heroku
-        uses: jctaveras/heroku-deploy@v1.0.0 # use the latest version of the action
+      - name: Build and push Docker to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          email: 'robyawaluddin@gmail.com' # your heroku email
-          api_key: ${{ secrets.HEROKU_API_KEY }} # your heroku api key
-          app_name: 'backup-api-poins-id' # you aplication name
-          dockerfile_path: '.' # set the path to the folder where the Dockerfile is located
-          process_type: 'web'
+          heroku_app_name: backup-api-poins-id
+          appdir: "."
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: 'robyawaluddin@gmail.com'
+          usedocker: true

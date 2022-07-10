@@ -4,6 +4,7 @@ import (
 	"api-redeem-point/api/admin"
 	"api-redeem-point/api/customer"
 	"api-redeem-point/api/middleware"
+	"api-redeem-point/api/store"
 
 	"github.com/labstack/echo/v4"
 )
@@ -11,6 +12,7 @@ import (
 type Controller struct {
 	CustomerController *customer.Controller
 	AdminController    *admin.Controller
+	StoreController    *store.Controller
 }
 
 func RegistrationPath(e *echo.Echo, controller Controller) {
@@ -45,4 +47,9 @@ func RegistrationPath(e *echo.Echo, controller Controller) {
 	g.DELETE("/store", controller.AdminController.DeleteStore, middleware.AdminSetupAuthenticationJWT())
 	g.GET("/store", controller.AdminController.GetStore, middleware.AdminSetupAuthenticationJWT())
 	g.PUT("/store", controller.AdminController.UpdateStore, middleware.AdminSetupAuthenticationJWT())
+	//store
+	s := c.Group("/store")
+	s.POST("", controller.CustomerController.RegisterStore)
+	s.POST("/login", controller.StoreController.LoginStore)
+	s.POST("/poin", controller.StoreController.InputPoinStore, middleware.StoreSetupAuthenticationJWT())
 }

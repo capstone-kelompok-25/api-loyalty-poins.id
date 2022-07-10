@@ -6,6 +6,7 @@ go 1.17
 require (
 	github.com/spf13/viper v1.11.0
 	github.com/swaggo/swag v1.8.1
+	github.com/xendit/xendit-go v1.0.8
 	golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4
 )
 
@@ -43,7 +44,6 @@ require (
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/joho/godotenv v1.4.0
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/labstack/gommon v0.3.1
 	github.com/magiconair/properties v1.8.6 // indirect
@@ -60,7 +60,6 @@ require (
 	github.com/swaggo/echo-swagger v1.3.2
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.1 // indirect
-	github.com/xendit/xendit-go v1.0.8
 	golang.org/x/net v0.0.0-20220425223048-2871e0cb64e4 // indirect
 	golang.org/x/sys v0.0.0-20220422013727-9388b58f7150 // indirect
 	golang.org/x/text v0.3.7 // indirect

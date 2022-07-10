@@ -1,6 +1,7 @@
 package api
 
 import (
+	"api-redeem-point/api/admin"
 	"api-redeem-point/api/customer"
 	"api-redeem-point/api/middleware"
 	"api-redeem-point/api/store"
@@ -10,6 +11,7 @@ import (
 
 type Controller struct {
 	CustomerController *customer.Controller
+	AdminController    *admin.Controller
 	StoreController    *store.Controller
 }
 
@@ -26,6 +28,25 @@ func RegistrationPath(e *echo.Echo, controller Controller) {
 	c.POST("/cashout", controller.CustomerController.OrderCashout, middleware.CustomerSetupAuthenticationJWT())
 	c.POST("/emoney", controller.CustomerController.OrderEmoney, middleware.CustomerSetupAuthenticationJWT())
 	c.POST("/callback", controller.CustomerController.CallbackXendit)
+	//admin
+	g := c.Group("/admin")
+	g.POST("/login", controller.AdminController.LoginAdmin)
+	g.POST("", controller.AdminController.CreateAdmin)
+	g.GET("", controller.AdminController.Dashboard, middleware.AdminSetupAuthenticationJWT())
+	g.GET("/:id", controller.AdminController.FindAdminByID, middleware.AdminSetupAuthenticationJWT())
+	g.GET("/transaction/pending", controller.AdminController.TransactionPending, middleware.AdminSetupAuthenticationJWT())
+	g.POST("/approve/:idtransaction", controller.AdminController.ApproveTransaction, middleware.AdminSetupAuthenticationJWT())
+	g.GET("/history", controller.AdminController.FindHistoryCustomers, middleware.AdminSetupAuthenticationJWT())
+	g.GET("/customer", controller.AdminController.FindCustomers, middleware.AdminSetupAuthenticationJWT())
+	g.PUT("/customer", controller.AdminController.UpdateCustomer, middleware.AdminSetupAuthenticationJWT())
+	g.DELETE("/customer", controller.AdminController.DeleteCustomer, middleware.AdminSetupAuthenticationJWT())
+	g.PUT("/customer/point", controller.AdminController.UpdateCustomerPoint, middleware.AdminSetupAuthenticationJWT())
+	g.GET("/stock", controller.AdminController.StockProduct, middleware.AdminSetupAuthenticationJWT())
+	g.PUT("/stock", controller.AdminController.UpdateStock, middleware.AdminSetupAuthenticationJWT())
+	g.GET("/historystore", controller.AdminController.HistoryStore, middleware.AdminSetupAuthenticationJWT())
+	g.DELETE("/store", controller.AdminController.DeleteStore, middleware.AdminSetupAuthenticationJWT())
+	g.GET("/store", controller.AdminController.GetStore, middleware.AdminSetupAuthenticationJWT())
+	g.PUT("/store", controller.AdminController.UpdateStore, middleware.AdminSetupAuthenticationJWT())
 	//store
 	s := c.Group("/store")
 	s.POST("", controller.CustomerController.RegisterStore)

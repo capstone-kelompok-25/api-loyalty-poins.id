@@ -23,7 +23,6 @@ import (
 // @host api-poins-id.herokuapp.com/v1
 // @BasePath /
 func main() {
-	fmt.Println(os.Getenv("PORT"))
 	port := os.Getenv("PORT")
 
 	config := config.GetConfig()

@@ -10,6 +10,11 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
+func CustomerSetupAuthenticationJWT() echo.MiddlewareFunc {
+	config := ConfigMiddleware("Customer")
+	return middleware.JWTWithConfig(config)
+}
+
 func ConfigMiddleware(fitur string) middleware.JWTConfig {
 	SECRET_KEY := os.Getenv("SECRET_JWT")
 	config := middleware.JWTConfig{

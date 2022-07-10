@@ -12,7 +12,6 @@ import (
 
 	_ "api-redeem-point/docs"
 
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -24,12 +23,8 @@ import (
 // @host api-poins-id.herokuapp.com/v1
 // @BasePath /
 func main() {
-	err := godotenv.Load(".env")
+	fmt.Println(os.Getenv("PORT"))
 	port := os.Getenv("PORT")
-
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
 
 	config := config.GetConfig()
 	dbCon := utils.NewConnectionDatabase(config)

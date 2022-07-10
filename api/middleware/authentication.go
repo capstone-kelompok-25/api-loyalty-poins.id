@@ -15,6 +15,11 @@ func CustomerSetupAuthenticationJWT() echo.MiddlewareFunc {
 	return middleware.JWTWithConfig(config)
 }
 
+func AdminSetupAuthenticationJWT() echo.MiddlewareFunc {
+	config := ConfigMiddleware("Admin")
+	return middleware.JWTWithConfig(config)
+}
+
 func ConfigMiddleware(fitur string) middleware.JWTConfig {
 	SECRET_KEY := os.Getenv("SECRET_JWT")
 	config := middleware.JWTConfig{

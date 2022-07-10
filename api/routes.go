@@ -3,12 +3,14 @@ package api
 import (
 	"api-redeem-point/api/customer"
 	"api-redeem-point/api/middleware"
+	"api-redeem-point/api/store"
 
 	"github.com/labstack/echo/v4"
 )
 
 type Controller struct {
 	CustomerController *customer.Controller
+	StoreController    *store.Controller
 }
 
 func RegistrationPath(e *echo.Echo, controller Controller) {
@@ -24,4 +26,9 @@ func RegistrationPath(e *echo.Echo, controller Controller) {
 	c.POST("/cashout", controller.CustomerController.OrderCashout, middleware.CustomerSetupAuthenticationJWT())
 	c.POST("/emoney", controller.CustomerController.OrderEmoney, middleware.CustomerSetupAuthenticationJWT())
 	c.POST("/callback", controller.CustomerController.CallbackXendit)
+	//store
+	s := c.Group("/store")
+	s.POST("", controller.CustomerController.RegisterStore)
+	s.POST("/login", controller.StoreController.LoginStore)
+	s.POST("/poin", controller.StoreController.InputPoinStore, middleware.StoreSetupAuthenticationJWT())
 }

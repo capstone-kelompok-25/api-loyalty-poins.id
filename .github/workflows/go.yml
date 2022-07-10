@@ -36,5 +36,5 @@ jobs:
           email: 'robyawaluddin@gmail.com' # your heroku email
           api_key: ${{ secrets.HEROKU_API_KEY }} # your heroku api key
           app_name: 'backup-api-poins-id' # you aplication name
-          dockerfile_path: 'dockerfile' # set the path to the folder where the Dockerfile is located
+          dockerfile_path: '.' # set the path to the folder where the Dockerfile is located
           process_type: 'web'

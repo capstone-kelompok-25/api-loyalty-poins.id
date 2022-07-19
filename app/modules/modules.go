@@ -4,8 +4,8 @@ import (
 	"api-redeem-point/api"
 	adminApi "api-redeem-point/api/admin"
 	customerApi "api-redeem-point/api/customer"
-	adminBusiness "api-redeem-point/business/admin"
 	storeApi "api-redeem-point/api/store"
+	adminBusiness "api-redeem-point/business/admin"
 	customerBusiness "api-redeem-point/business/customer"
 	storeBusiness "api-redeem-point/business/store"
 	"api-redeem-point/config"
@@ -15,7 +15,7 @@ import (
 	"api-redeem-point/utils"
 )
 
-func RegistrationModules(dbCon *utils.DatabaseConnection, config *config.AppConfig) api.Controller {
+func RegistrationModules(dbCon *utils.DatabaseConnection, _ *config.AppConfig) api.Controller {
 	customerPermitRepository := customerRepo.RepositoryFactory(dbCon)
 	customerPermitService := customerBusiness.NewService(customerPermitRepository)
 	customerPermitController := customerApi.NewController(customerPermitService)
@@ -23,8 +23,8 @@ func RegistrationModules(dbCon *utils.DatabaseConnection, config *config.AppConf
 	adminPermitRepository := adminRepo.RepositoryFactory(dbCon)
 	adminPermitService := adminBusiness.NewService(adminPermitRepository)
 	adminPermitController := adminApi.NewController(adminPermitService)
-  
-  storePermitRepository := storeRepo.RepositoryFactory(dbCon)
+
+	storePermitRepository := storeRepo.RepositoryFactory(dbCon)
 	storePermitService := storeBusiness.NewService(storePermitRepository)
 	storePermitController := storeApi.NewController(storePermitService)
 

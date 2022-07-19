@@ -6,7 +6,7 @@
         "contact": {},
         "version": "1.0"
     },
-    "host": "api-poins-id.herokuapp.com/v1",
+    "host": "backup-api-poins-id.herokuapp.com/v1",
     "basePath": "/",
     "paths": {
         "/admin": {

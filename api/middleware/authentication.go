@@ -19,9 +19,9 @@ func AdminSetupAuthenticationJWT() echo.MiddlewareFunc {
 	config := ConfigMiddleware("Admin")
 	return middleware.JWTWithConfig(config)
 }
+
 func StoreSetupAuthenticationJWT() echo.MiddlewareFunc {
 	config := ConfigMiddleware("Store")
-
 	return middleware.JWTWithConfig(config)
 }
 

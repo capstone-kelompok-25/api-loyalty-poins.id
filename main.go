@@ -40,15 +40,12 @@ func main() {
 	e := echo.New()
 	handleSwagger := echoSwagger.WrapHandler
 	e.GET("/swagger/*", handleSwagger)
-	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-		AllowOrigins: []string{"*"},
-		AllowHeaders: []string{echo.HeaderAuthorization, echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
-	}))
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{}))
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
 		Format: "time=${time_rfc3339_nano}, method=${method}, uri=${uri}, status=${status}\n",
 	}))
 	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "success")
+		return c.String(http.StatusOK, "API Is Active")
 	})
 	api.RegistrationPath(e, controllers)
 

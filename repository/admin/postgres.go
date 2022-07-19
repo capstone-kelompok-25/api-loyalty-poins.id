@@ -232,12 +232,12 @@ func (repo *PosgresRepository) GetHistoryCustomers(pagination utils.Pagination, 
 }
 
 func (repo *PosgresRepository) DeleteCustomer(id int) error {
-	var customer *admin.Customers
+	var customer *repository.Customer
 	err := repo.db.Model(&repository.Customer{}).Where("ID = ?", id).First(&customer).Error
 	if err != nil {
 		return err
 	}
-	err = repo.db.Delete(customer, id).Error
+	repo.db.Delete(&customer)
 	if err != nil {
 		return err
 	}
@@ -328,6 +328,7 @@ func (repo *PosgresRepository) GetTransactionMonthDay() ([]admin.TransactionMont
 
 func (repo *PosgresRepository) HistoryStore(pagination utils.Pagination, name string) ([]admin.HistoryStore, error) {
 	var tmpHistory []admin.HistoryStore
+	var History []admin.HistoryStore
 	offset := (pagination.Page - 1) * pagination.Limit
 	queryBuider := repo.db.Limit(pagination.Limit).Offset(offset).Order(pagination.Sort)
 	if name != "" {
@@ -337,7 +338,14 @@ func (repo *PosgresRepository) HistoryStore(pagination utils.Pagination, name st
 		if err != nil {
 			return nil, err
 		}
-		return tmpHistory, nil
+		for _, v := range tmpHistory {
+			if v.Store.Store != "" {
+				var tmp admin.HistoryStore
+				tmp = v
+				History = append(History, tmp)
+			}
+		}
+		return History, nil
 	}
 	err := queryBuider.Model(&customerBusiness.History_Transaction{}).Where("Status_Poin = ?", "IN").Preload("Customers", func(db *gorm.DB) *gorm.DB {
 		return db.Select("id", "email", "fullname")
@@ -345,11 +353,18 @@ func (repo *PosgresRepository) HistoryStore(pagination utils.Pagination, name st
 	if err != nil {
 		return nil, err
 	}
-	return tmpHistory, nil
+	for _, v := range tmpHistory {
+		if v.Store.Store != "" {
+			var tmp admin.HistoryStore
+			tmp = v
+			History = append(History, tmp)
+		}
+	}
+	return History, nil
 }
 
 func (repo *PosgresRepository) DeleteStore(id int) error {
-	var store *customerBusiness.Store
+	var store *repository.Store
 	err := repo.db.Model(&repository.Store{}).Where("ID = ?", id).First(&store).Error
 	if err != nil {
 		return err

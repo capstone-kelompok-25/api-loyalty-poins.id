@@ -93,14 +93,32 @@ func (repo *PosgresRepository) InsertCustomer(Data *customerBusiness.RegisterCus
 		err = errors.New("email sudah digunakan")
 		return nil, err
 	}
-	fmt.Println(Customer)
 	repo.db.Create(&Customer)
 
 	return Data, nil
 }
 
 func (repo *PosgresRepository) UpdateCustomer(Data *customerBusiness.UpdateCustomer) (*customerBusiness.UpdateCustomer, error) {
-	err := repo.db.Model(&customerBusiness.Customers{}).Where("ID = ?", Data.ID).Updates(customerBusiness.Customers{Email: Data.Email, Fullname: Data.Name, No_hp: Data.No_hp}).Error
+	if Data.Password != "" {
+		password, _ := Hash(Data.Password)
+		Data.Password = string(password)
+	}
+	var account customerBusiness.Customers
+	repo.db.Model(&repository.Customer{}).Where("email = ?", Data.Email).First(&account)
+	var err error
+	if account.Email != "" {
+		func() {
+			if Data.Email == account.Email {
+				return
+			}
+			err = errors.New("Email already used")
+			return
+		}()
+		if err != nil {
+			return nil, err
+		}
+	}
+	err = repo.db.Model(&customerBusiness.Customers{}).Where("ID = ?", Data.ID).Updates(customerBusiness.Customers{Email: Data.Email, Fullname: Data.Fullname, Password: Data.Password, No_hp: Data.No_hp, Pin: Data.Pin}).Error
 	if err != nil {
 		return nil, err
 	}
@@ -383,7 +401,7 @@ func (repo *PosgresRepository) InsertStore(store *customerBusiness.RegisterStore
 		err := errors.New("Email already use")
 		return nil, err
 	}
-	err := repo.db.Create(&customerBusiness.Store{Email: store.Email, Password: string(hash), Store: store.Store, Alamat: store.Alamat}).Error
+	err := repo.db.Create(&repository.Store{Email: store.Email, Password: string(hash), Store: store.Store, Alamat: store.Alamat}).Error
 	if err != nil {
 		return nil, err
 	}

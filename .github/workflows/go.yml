@@ -1,4 +1,4 @@
-name: Go
+name: Deploy
 
 on:
   push:
@@ -23,3 +23,26 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build and push Docker to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+          appdir: "."
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          usedocker: true
+          docker_build_args: |
+            NODE_ENV
+            SECRET_KEY
+            PORT
+        env:
+          NODE_ENV: production
+          SECRET_KEY: ${{ secrets.MY_SECRET_KEY }}
+          PORT: ${{ secrets.PORT }}

@@ -45,6 +45,24 @@ definitions:
     - fullname
     - id
     type: object
+  admin.UpdateStore:
+    properties:
+      alamat:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      store:
+        type: string
+    required:
+    - alamat
+    - email
+    - id
+    - store
+    type: object
   customer.AuthLogin:
     properties:
       email:
@@ -204,6 +222,13 @@ paths:
       consumes:
       - application/json
       description: Dashboard for admin
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -248,6 +273,12 @@ paths:
       consumes:
       - application/json
       description: FindAdminByID
+      parameters:
+      - description: id admin
+        in: path
+        name: admin
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -268,6 +299,12 @@ paths:
       - application/json
       description: Approve Transaction
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: transaction_id
         in: path
         name: transactionid
@@ -293,6 +330,12 @@ paths:
       - application/json
       description: Delete Customers for admin
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id customer
         in: query
         name: id
@@ -315,8 +358,14 @@ paths:
     get:
       consumes:
       - application/json
-      description: Find customers for admin
+      description: Get Store for admin
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: pagination
         in: query
         name: limit
@@ -327,6 +376,11 @@ paths:
         name: page
         required: true
         type: integer
+      - description: pagination
+        in: query
+        name: sort
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -338,20 +392,26 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/response.Error'
-      summary: Find customers
+      summary: Get Store
       tags:
       - Admin
     put:
       consumes:
       - application/json
-      description: Transaction By Date for admin
+      description: Get Store for admin
       parameters:
-      - description: admin
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: store
         in: body
         name: admin
         required: true
         schema:
-          $ref: '#/definitions/admin.UpdateCustomer'
+          $ref: '#/definitions/admin.UpdateStore'
       produces:
       - application/json
       responses:
@@ -363,7 +423,7 @@ paths:
           description: Bad Request
           schema:
             $ref: '#/definitions/response.Error'
-      summary: Transaction By Date
+      summary: Get Store
       tags:
       - Admin
   /admin/customer/point:
@@ -372,6 +432,12 @@ paths:
       - application/json
       description: Update customer point for admin
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id customer
         in: query
         name: id
@@ -402,6 +468,12 @@ paths:
       - application/json
       description: Find History Customers for admin
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: pagination
         in: query
         name: limit
@@ -412,6 +484,11 @@ paths:
         name: page
         required: true
         type: integer
+      - description: pagination
+        in: query
+        name: sort
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -432,6 +509,12 @@ paths:
       - application/json
       description: History Store for admin
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: pagination
         in: query
         name: limit
@@ -442,6 +525,11 @@ paths:
         name: page
         required: true
         type: integer
+      - description: pagination
+        in: query
+        name: sort
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -487,6 +575,13 @@ paths:
       consumes:
       - application/json
       description: Stock Product for admin
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -506,6 +601,12 @@ paths:
       - application/json
       description: Update Stock Product for admin
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id product
         in: query
         name: id
@@ -536,6 +637,12 @@ paths:
       - application/json
       description: Delete Store for admin
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: id store
         in: query
         name: id
@@ -560,6 +667,13 @@ paths:
       consumes:
       - application/json
       description: Transaction Pending for Admin
+      parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       produces:
       - application/json
       responses:
@@ -928,6 +1042,12 @@ paths:
       - application/json
       description: Input Poin Customer for Store
       parameters:
+      - default: Bearer <Add access token here>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
       - description: InputPoinStore
         in: body
         name: InputPoinStore

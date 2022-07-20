@@ -41,8 +41,6 @@ definitions:
       pin:
         type: integer
     required:
-    - email
-    - fullname
     - id
     type: object
   admin.UpdateStore:
@@ -210,7 +208,7 @@ definitions:
     - customer_id
     - store_id
     type: object
-host: backup-api-poins-id.herokuapp.com/v1
+host: api-poins-id.herokuapp.com/v1
 info:
   contact: {}
   description: Berikut API Poins ID

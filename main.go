@@ -20,7 +20,7 @@ import (
 // @title API Poins ID
 // @version 1.0
 // @description Berikut API Poins ID
-// @host backup-api-poins-id.herokuapp.com/v1
+// @host api-poins-id.herokuapp.com/v1
 // @BasePath /
 func main() {
 	port := os.Getenv("PORT")

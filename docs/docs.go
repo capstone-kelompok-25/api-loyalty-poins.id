@@ -29,6 +29,16 @@ const docTemplate = `{
                     "Admin"
                 ],
                 "summary": "Dashboard Admin",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -99,6 +109,14 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
                         "description": "transaction_id",
                         "name": "transactionid",
                         "in": "path",
@@ -123,7 +141,7 @@ const docTemplate = `{
         },
         "/admin/customer": {
             "get": {
-                "description": "Find customers for admin",
+                "description": "Get Store for admin",
                 "consumes": [
                     "application/json"
                 ],
@@ -133,8 +151,16 @@ const docTemplate = `{
                 "tags": [
                     "Admin"
                 ],
-                "summary": "Find customers",
+                "summary": "Get Store",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "pagination",
@@ -146,6 +172,13 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "pagination",
                         "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "pagination",
+                        "name": "sort",
                         "in": "query",
                         "required": true
                     }
@@ -166,7 +199,7 @@ const docTemplate = `{
                 }
             },
             "put": {
-                "description": "Transaction By Date for admin",
+                "description": "Get Store for admin",
                 "consumes": [
                     "application/json"
                 ],
@@ -176,15 +209,23 @@ const docTemplate = `{
                 "tags": [
                     "Admin"
                 ],
-                "summary": "Transaction By Date",
+                "summary": "Get Store",
                 "parameters": [
                     {
-                        "description": "admin",
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "description": "store",
                         "name": "admin",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/admin.UpdateCustomer"
+                            "$ref": "#/definitions/admin.UpdateStore"
                         }
                     }
                 ],
@@ -216,6 +257,14 @@ const docTemplate = `{
                 ],
                 "summary": "Delete Customers",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "id customer",
@@ -254,6 +303,14 @@ const docTemplate = `{
                 ],
                 "summary": "Update customer point",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "id customer",
@@ -300,6 +357,14 @@ const docTemplate = `{
                 "summary": "Find History Customers",
                 "parameters": [
                     {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "pagination",
                         "name": "limit",
@@ -310,6 +375,13 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "pagination",
                         "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "pagination",
+                        "name": "sort",
                         "in": "query",
                         "required": true
                     }
@@ -345,6 +417,14 @@ const docTemplate = `{
                 "summary": "History Store",
                 "parameters": [
                     {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "pagination",
                         "name": "limit",
@@ -355,6 +435,13 @@ const docTemplate = `{
                         "type": "integer",
                         "description": "pagination",
                         "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "pagination",
+                        "name": "sort",
                         "in": "query",
                         "required": true
                     }
@@ -428,6 +515,16 @@ const docTemplate = `{
                     "Admin"
                 ],
                 "summary": "Stock Product",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -456,6 +553,14 @@ const docTemplate = `{
                 ],
                 "summary": "Update Stock Product",
                 "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
                     {
                         "type": "integer",
                         "description": "id product",
@@ -502,6 +607,14 @@ const docTemplate = `{
                 "summary": "Delete Store",
                 "parameters": [
                     {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "type": "integer",
                         "description": "id store",
                         "name": "id",
@@ -538,6 +651,16 @@ const docTemplate = `{
                     "Admin"
                 ],
                 "summary": "Transaction Pending",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -567,6 +690,15 @@ const docTemplate = `{
                     "Admin"
                 ],
                 "summary": "Find Admin By ID",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "id admin",
+                        "name": "admin",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1124,6 +1256,14 @@ const docTemplate = `{
                 "summary": "Input Poin Store",
                 "parameters": [
                     {
+                        "type": "string",
+                        "default": "Bearer \u003cAdd access token here\u003e",
+                        "description": "Insert your access token",
+                        "name": "Authorization",
+                        "in": "header",
+                        "required": true
+                    },
+                    {
                         "description": "InputPoinStore",
                         "name": "InputPoinStore",
                         "in": "body",
@@ -1214,6 +1354,32 @@ const docTemplate = `{
                 },
                 "pin": {
                     "type": "integer"
+                }
+            }
+        },
+        "admin.UpdateStore": {
+            "type": "object",
+            "required": [
+                "alamat",
+                "email",
+                "id",
+                "store"
+            ],
+            "properties": {
+                "alamat": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "store": {
+                    "type": "string"
                 }
             }
         },

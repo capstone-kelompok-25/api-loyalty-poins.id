@@ -50,6 +50,7 @@ func (Controller *Controller) LoginStore(c echo.Context) error {
 // @tags Store
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param InputPoinStore body store.InputPoin true "InputPoinStore"
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error

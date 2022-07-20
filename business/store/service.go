@@ -25,6 +25,10 @@ func NewService(repository Repository) Service {
 }
 
 func (s *service) LoginStore(auth *AuthStore) (*ResponseLoginStore, error) {
+	err := s.validate.Struct(auth)
+	if err != nil {
+		return nil, err
+	}
 	return s.repository.SignStore(auth)
 }
 

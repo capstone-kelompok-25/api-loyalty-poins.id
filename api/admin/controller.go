@@ -26,6 +26,7 @@ func NewController(service adminBusiness.Service) *Controller {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param id admin path string true "id admin"
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
 // @Router /admin/{id} [get]
@@ -51,6 +52,7 @@ func (Controller *Controller) FindAdminByID(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
 // @Router /admin [get]
@@ -75,6 +77,7 @@ func (Controller *Controller) Dashboard(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
 // @Router /admin/transaction/pending [get]
@@ -174,6 +177,7 @@ func (Controller *Controller) UpdateAdmin(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param transactionid path string true "transaction_id"
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
@@ -199,6 +203,7 @@ func (Controller *Controller) ApproveTransaction(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param limit query int true "pagination"
 // @Param page query int true "pagination"
 // @Success 200	{object} response.Result
@@ -225,8 +230,10 @@ func (Controller *Controller) FindCustomers(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param limit query int true "pagination"
 // @Param page query int true "pagination"
+// @Param sort query string true "pagination"
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
 // @Router /admin/history [get]
@@ -254,6 +261,7 @@ func (Controller *Controller) FindHistoryCustomers(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param id query int true "id customer"
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
@@ -280,6 +288,7 @@ func (Controller *Controller) DeleteCustomer(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param admin body admin.UpdateCustomer true "admin"
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
@@ -308,6 +317,7 @@ func (Controller *Controller) UpdateCustomer(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param id query int true "id customer"
 // @Param point query int true "point customer"
 // @Success 200	{object} response.Result
@@ -336,6 +346,7 @@ func (Controller *Controller) UpdateCustomerPoint(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
 // @Router /admin/stock [get]
@@ -360,6 +371,7 @@ func (Controller *Controller) StockProduct(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param id query int true "id product"
 // @Param balance query int true "balance product"
 // @Success 200	{object} response.Result
@@ -388,8 +400,10 @@ func (Controller *Controller) UpdateStock(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param limit query int true "pagination"
 // @Param page query int true "pagination"
+// @Param sort query string true "pagination"
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
 // @Router /admin/historystore [get]
@@ -417,6 +431,7 @@ func (Controller *Controller) HistoryStore(c echo.Context) error {
 // @tags Admin
 // @Accept json
 // @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
 // @Param id query int true "id store"
 // @Success 200	{object} response.Result
 // @Failure 400 {object} response.Error
@@ -437,6 +452,19 @@ func (Controller *Controller) DeleteStore(c echo.Context) error {
 	})
 }
 
+// Create godoc
+// @Summary Get Store
+// @description Get Store for admin
+// @tags Admin
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
+// @Param limit query int true "pagination"
+// @Param page query int true "pagination"
+// @Param sort query string true "pagination"
+// @Success 200	{object} response.Result
+// @Failure 400 {object} response.Error
+// @Router /admin/customer [get]
 func (Controller *Controller) GetStore(c echo.Context) error {
 	name := c.QueryParam("name")
 	pagination := utils.GeneratePagination(c.Request().URL.Query())
@@ -454,6 +482,17 @@ func (Controller *Controller) GetStore(c echo.Context) error {
 	})
 }
 
+// Create godoc
+// @Summary Get Store
+// @description Get Store for admin
+// @tags Admin
+// @Accept json
+// @Produce json
+// @Param Authorization header string true "Insert your access token" default(Bearer <Add access token here>)
+// @Param admin body admin.UpdateStore true "store"
+// @Success 200	{object} response.Result
+// @Failure 400 {object} response.Error
+// @Router /admin/customer [put]
 func (Controller *Controller) UpdateStore(c echo.Context) error {
 	var Store adminBusiness.UpdateStore
 	c.Bind(&Store)
